@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Query Tool</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>AI Response Comparison</h1>
+            <p>Compare responses from ChatGPT, Gemini, and Claude</p>
+        </header>
+
+        <form id="queryForm">
+            <div class="input-container">
+                <input 
+                    type="text" 
+                    id="questionInput" 
+                    class="input-field" 
+                    placeholder="Enter your question..."
+                    required
+                >
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    Ask AIs
+                </button>
+            </div>
+        </form>
+
+        <div class="responses-grid">
+            <div class="response-card">
+                <div class="card-header">
+                    <span class="model-name">ChatGPT</span>
+                    <span class="response-time" id="chatgptTime"></span>
+                </div>
+                <div class="card-content">
+                    <textarea class="response-text" id="chatgptResponse" readonly></textarea>
+                </div>
+            </div>
+
+            <div class="response-card">
+                <div class="card-header">
+                    <span class="model-name">Gemini</span>
+                    <span class="response-time" id="geminiTime"></span>
+                </div>
+                <div class="card-content">
+                    <textarea class="response-text" id="geminiResponse" readonly></textarea>
+                </div>
+            </div>
+
+            <div class="response-card">
+                <div class="card-header">
+                    <span class="model-name">Claude</span>
+                    <span class="response-time" id="claudeTime"></span>
+                </div>
+                <div class="card-content">
+                    <textarea class="response-text" id="claudeResponse" readonly></textarea>
+                </div>
+            </div>
+        </div>
+
+        <button id="compareBtn" class="compare-btn" style="display: none;">
+            Compare Responses
+        </button>
+
+        <div id="comparisonResults" class="comparison-results" style="display: none;"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
