@@ -3,7 +3,47 @@ document.addEventListener('DOMContentLoaded', function() {
     const submitBtn = document.getElementById('submitBtn');
     const compareBtn = document.getElementById('compareBtn');
     const comparisonResults = document.getElementById('comparisonResults');
-    
+
+    // Copy button functionality
+    const copyButtons = document.querySelectorAll('.copy-btn');
+    copyButtons.forEach(btn => {
+        btn.addEventListener('click', async function() {
+            const targetId = this.getAttribute('data-target');
+            const textArea = document.getElementById(targetId);
+            const text = textArea.value;
+
+            if (!text) return;
+
+            try {
+                await navigator.clipboard.writeText(text);
+
+                // Visual feedback
+                const originalContent = this.innerHTML;
+                this.classList.add('copied');
+                this.innerHTML = '✓';
+
+                setTimeout(() => {
+                    this.classList.remove('copied');
+                    this.innerHTML = originalContent;
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy:', err);
+                // Fallback for older browsers
+                textArea.select();
+                document.execCommand('copy');
+
+                const originalContent = this.innerHTML;
+                this.classList.add('copied');
+                this.innerHTML = '✓';
+
+                setTimeout(() => {
+                    this.classList.remove('copied');
+                    this.innerHTML = originalContent;
+                }, 2000);
+            }
+        });
+    });
+
     function setLoading(isLoading) {
         submitBtn.disabled = isLoading;
         if (isLoading) {
@@ -78,15 +118,15 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Display comparison results
             comparisonResults.innerHTML = `
-                <h2 style="margin-bottom: 1rem;">Comparison Results</h2>
+                <h2 style="margin-bottom: 2rem;">Jämförelse av svaren</h2>
                 <div class="responses-grid">
                     ${Object.entries(data).map(([model, analysis]) => `
                         <div class="response-card">
                             <div class="card-header">
-                                <span class="model-name">${model}'s Analysis</span>
+                                <span class="model-name">${model}s analys</span>
                             </div>
                             <div class="card-content">
-                                <div class="response-text">${marked.parse(analysis)}</div>
+                                <div class="response-text">${analysis.replace(/\n/g, '<br>')}</div>
                             </div>
                         </div>
                     `).join('')}

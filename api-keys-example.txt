@@ -1,6 +1,0 @@
-# Replace with your Anthropic API key (Claude)
-your_anthropic_api_key
-# Replace with your OpenAI API key (ChatGPT)
-your_openai_api_key
-# Replace with your Google API key (Gemini)
-your_google_api_key

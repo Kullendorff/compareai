@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Query Tool</title>
+    <title>AI Comparison Tool - Compare ChatGPT, Gemini & Claude</title>
+    <meta name="description" content="Compare responses from ChatGPT, Gemini, and Claude side-by-side">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <div class="container">
         <header class="header">
-            <h1>AI Response Comparison</h1>
-            <p>Compare responses from ChatGPT, Gemini, and Claude</p>
+            <h1>🤖 AI Comparison Tool</h1>
+            <p>Compare responses from ChatGPT, Gemini, and Claude side-by-side</p>
         </header>
 
         <form id="queryForm">
@@ -32,37 +36,52 @@
         <div class="responses-grid">
             <div class="response-card">
                 <div class="card-header">
-                    <span class="model-name">ChatGPT</span>
-                    <span class="response-time" id="chatgptTime"></span>
+                    <span class="model-name">🟢 ChatGPT</span>
+                    <div class="header-actions">
+                        <span class="response-time" id="chatgptTime"></span>
+                        <button class="copy-btn" data-target="chatgptResponse" title="Copy to clipboard">
+                            📋
+                        </button>
+                    </div>
                 </div>
                 <div class="card-content">
-                    <textarea class="response-text" id="chatgptResponse" readonly></textarea>
+                    <textarea class="response-text" id="chatgptResponse" readonly placeholder="Response will appear here..."></textarea>
                 </div>
             </div>
 
             <div class="response-card">
                 <div class="card-header">
-                    <span class="model-name">Gemini</span>
-                    <span class="response-time" id="geminiTime"></span>
+                    <span class="model-name">🔵 Gemini</span>
+                    <div class="header-actions">
+                        <span class="response-time" id="geminiTime"></span>
+                        <button class="copy-btn" data-target="geminiResponse" title="Copy to clipboard">
+                            📋
+                        </button>
+                    </div>
                 </div>
                 <div class="card-content">
-                    <textarea class="response-text" id="geminiResponse" readonly></textarea>
+                    <textarea class="response-text" id="geminiResponse" readonly placeholder="Response will appear here..."></textarea>
                 </div>
             </div>
 
             <div class="response-card">
                 <div class="card-header">
-                    <span class="model-name">Claude</span>
-                    <span class="response-time" id="claudeTime"></span>
+                    <span class="model-name">🟠 Claude</span>
+                    <div class="header-actions">
+                        <span class="response-time" id="claudeTime"></span>
+                        <button class="copy-btn" data-target="claudeResponse" title="Copy to clipboard">
+                            📋
+                        </button>
+                    </div>
                 </div>
                 <div class="card-content">
-                    <textarea class="response-text" id="claudeResponse" readonly></textarea>
+                    <textarea class="response-text" id="claudeResponse" readonly placeholder="Response will appear here..."></textarea>
                 </div>
             </div>
         </div>
 
         <button id="compareBtn" class="compare-btn" style="display: none;">
-            Compare Responses
+            ⚡ Compare Responses
         </button>
 
         <div id="comparisonResults" class="comparison-results" style="display: none;"></div>

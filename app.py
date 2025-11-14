@@ -32,18 +32,23 @@ def ask():
 def compare():
     data = request.json
     comparison_question = (
-        f"Analyze these three AI responses and explain which one is best and why:\n\n"
-        f"ChatGPT: {data['chatgpt']}\n\n"
-        f"Gemini: {data['gemini']}\n\n"
-        f"Claude: {data['claude']}"
+        f"Analysera dessa tre AI-svar och svara på svenska.\n\n"
+        f"VIKTIGT FORMAT:\n"
+        f"- Första meningen: Ange ENBART vilket svar som är bäst (ChatGPT, Gemini eller Claude)\n"
+        f"- Sedan minst en tom rad\n"
+        f"- Sedan motivering i punktform eller löpande text\n"
+        f"- Använd normal text, INTE versaler\n\n"
+        f"ChatGPT svarade: {data['chatgpt']}\n\n"
+        f"Gemini svarade: {data['gemini']}\n\n"
+        f"Claude svarade: {data['claude']}"
     )
-    
+
     analyses = {
         'ChatGPT': ai_tool.ask_chatgpt(comparison_question),
         'Gemini': ai_tool.ask_gemini(comparison_question),
         'Claude': ai_tool.ask_claude(comparison_question)
     }
-    
+
     return jsonify(analyses)
 
 if __name__ == '__main__':
